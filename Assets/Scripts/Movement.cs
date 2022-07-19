@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
 
     private float _groundRadius = 0.5f;
     private int _angle = 180;
+    private string _walk = "Walk";
+    private string _Jump = "Jump";
 
     private bool _isGrounded;
     private Rigidbody2D _rigidbody2D;
@@ -28,7 +30,7 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true) 
         {
-            _animator.SetTrigger("Jump");
+            _animator.SetTrigger(_Jump);
             _rigidbody2D.AddForce(Vector2.up * _jumpForce);
         }
 
@@ -42,13 +44,13 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            _animator.SetBool("Walk", false);
+            _animator.SetBool(_walk, false);
         }
     }
 
     private void Walk(int angle)
     {
-        _animator.SetBool("Walk", true);
+        _animator.SetBool(_walk, true);
         transform.Translate(_speed * Time.deltaTime, 0, 0);
         transform.rotation = Quaternion.Euler(0, angle, 0);
     }
